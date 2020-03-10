@@ -1,5 +1,5 @@
 
-colors.web = list('green'="#7AB800","blue"="#007AB8")
+colors = c('primary'="#7AB800","secondary"="#007AB8")
 
 language = 'fr'
 
@@ -10,7 +10,10 @@ platform_define_survey(
   single.table=F,
   table = "pollster_results_intake",
   template="eu:intake",
-  geo.column="Q3"
+  geo.column="Q3",
+  mapping = list(
+    "hear.internet"=variable_available("Q17_2", rlang::quo(season < 2017))
+  )
 )
 
 
@@ -51,5 +54,32 @@ platform_options(
     max.year=2
   ),
   default_language = 'en',
-  use.country = FALSE
+  use.country = FALSE,
+  population.loader = "age",
+  country = "FR",
+  population.age.loader = 'country_file'
 )
+
+platform_geographic_levels(
+  c('zip', 'nuts3', 'nuts2', 'nuts1', 'country'),
+  # level code of the information in the survey
+  level.base = 'zip',
+  table = 'geo_levels',
+  columns = c('zip'='code_com', 'nuts3'='code_dep','nuts2'='code_reg', 'nuts1'='code_irg', 'country'='country'),
+  hierarchies=list(
+    'admin'=c('zip','nuts3','nuts2','nuts1','country')
+  ),
+  default.hierarchy="admin"
+)
+
+# List of geographic tables describing areas of each level
+# name=level code
+platform_geographic_tables(list(
+  'zip'=list(table='pollster_zip_codes', title=NULL, column='zip_code_key'),
+  'nuts3'=list(table='gis_departement',title='nom_dept', column='code_dept', zones=list('nuts2'='code_reg'), population_table="pop_dep"),
+  'nuts2'=list(table='gis_region', title='nom_region', column='code_reg', zones=list('nuts1'='code_irg'), population_table="pop_reg"),
+  #'rdd'=list(table='gis_region2016', title='title', column='code_rdd', zones=list('irg'='code_irg')),
+  'nuts1'=list(table="gis_interregion", title="title", column="code_irg", population_table="pop_irg"),
+  'country'=list()
+))
+

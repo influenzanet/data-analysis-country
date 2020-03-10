@@ -8,13 +8,15 @@ library(dplyr)
 
 season = get0("season", ifnotfound = get_current_season())
 
-has.population = FALSE
+has.population = TRUE
 
 # Get list of columns for questions in survey
 condition.columns = survey_labels('intake', 'condition')
 hear.columns = survey_labels('intake', 'hear.about')
 allergy.columns = survey_labels('intake', 'allergy')
 pets.columns = survey_labels('intake', 'pets')
+
+colors.web = platform_env("colors")
 
 columns = c('timestamp','gender','date.birth','vacc.curseason',"main.activity","occupation","often.ili", 'pregnant',hear.columns,'transport','smoker', condition.columns, allergy.columns, pets.columns )
 
@@ -39,7 +41,7 @@ g_save(my.path('age'), width=6, height=4)
 
 if( has.population) {
   # National population
-  pop = load_population_age(geo=NULL, age.breaks=age.categories, year=2016)
+  pop = load_population_age(geo="country", age.breaks=age.categories, year=2016)
   # Agregate by age & merge pop
   age_sexe_structure = intake %>% filter(!is.na(age.cat)) %>% group_by(age.cat, gender) %>% summarize(count=n())
   age_sexe_structure$pop = "cohort"
@@ -65,7 +67,7 @@ if( has.population) {
   cohort.title = i18n('cohort.title')
   population.title = i18n('population.title')
   pop.labels = c('cohort'=cohort.title, 'pop'=population.title)
-  pop.colors = c("pop"=colors.web$blue, "cohort"=colors.web$green)
+  pop.colors = c("pop"=colors.web$primary, "cohort"=colors.web$secondary)
 
   ggplot(age_structure, aes(x=age.cat, group=pop, fill=pop, y=prop)) +
     geom_bar(stat="identity", position = "dodge") +
