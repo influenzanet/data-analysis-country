@@ -15,6 +15,7 @@ R scripts must run in a project directory (i.e: with their project directory as 
 
 - R >= 3.4
 - [ifnBase package](https://github.com/cturbelin/ifnBase)
+- [swMisc package](https://github.com/sentiweb/swMisc)
 - packages : dplyr (>=0.7.5), rlang, ggplot2 (>=3.2)
 
 # Installation
