@@ -1,0 +1,25 @@
+Package: influenzanaet-analysis-country
+Type: Project
+Title: Influenzanet country analysis Projet
+Version: 0.0.9000
+Imports:
+  rlang,
+  ifnBase (>= 0.6.8),
+  forcats (>= 1),
+  dplyr (>= 1.1),
+  ggplot2 (>= 3.4),
+  duckdb
+Depends:
+  R (>= 4)
+Suggests:
+URL: https://www.influenzanet.info
+Additional_repositories: https://cran.sentiweb.fr/
+Remotes: github::sentiweb/swMisc, github::cturbelin/ifnBase
+BugReports: https://github.com/cturbelin/ifnBase/issues
+Authors@R: c(
+    person("Clément", "Turbelin", email="clement.turbelin@sorbonne-universite.fr", role=c("aut", "cre"))
+  )
+Description: Influenzanet data analysis at country/platform level 
+License: Proprietary
+Encoding: UTF-8
+NeedsCompilation: no

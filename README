@@ -1,0 +1,19 @@
+# Influenzanet Data Analysis for Country/Platform level
+
+This repository provides data analysis scripts for basic data analysis for one platform/country.
+
+It's
+
+## Requirements
+
+- An R software installation
+
+- Platform's data in a database following the legacy platform's table organization
+
+## Create the data
+
+### Using ifn-cli
+
+
+
+

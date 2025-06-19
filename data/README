@@ -1,0 +1,2 @@
+This data directory stores static data files intented to be shared across forks
+It's not advised to use it as your local data directory.
