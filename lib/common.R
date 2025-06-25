@@ -10,6 +10,7 @@ options(ifn=list(autoconnect=FALSE, platform.path="config/", share.data="data/")
 
 # Name of the file to load containing platform definition (surveys, table mapping, ...)
 PLATFORM_FILENAME = "default_platform"
+TRANSLATION_FILES = "data/i18n/common.en.json"
 
 library(duckdb)
 library(DBI)
@@ -57,10 +58,33 @@ load_config = function() {
     warning("`DB_DSN` has not been found, no database will be available")
   } 
   
-  share.option(platform=PLATFORM_FILENAME)
+  out.path = get0("OUTPUT_PATH", ifnotfound = "output")
+  
+  if(!endsWith(out.path, suffix = "/")) {
+    out.path = paste0(out.path, "/")
+  }
+  
+  share.option(platform=PLATFORM_FILENAME, base.out.path=out.path)
   
   invisible()
 }
 
+load_translation = function(files) {
+  for(file in files) {
+    r = jsonlite::read_json(file)
+    if(!is.list(r)) {
+      rlang::abort(paste("Error reading translation file", sQuote(file), "must only contain an object"))
+    }
+    n = which(names(r) == "#") # Remove comment
+    if(length(n)) {
+      r = r[-n]
+    }
+    i18n_set(!!!r)
+  }
+  # Ensure
+  i18n_set("#"="")
+}
+
 load_config()
 ifnBase::load_platform()
+load_translation(TRANSLATION_FILES)

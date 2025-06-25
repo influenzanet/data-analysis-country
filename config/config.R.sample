@@ -1,0 +1,24 @@
+###
+# Installation Configuration
+# This file contains local configuration (specific to this installation)
+###
+
+# DB_DSN Where the database file is located
+# By default if only a string is provided the default DuckDb driver will be used
+# A list can be provided with more options
+DB_DSN="/path/to/duckdb/file"
+
+# Eurostat Country code (must be official 2 letters country code)
+# Used to get population from the population files
+EUROSTAT_COUNTRY = 'ZZ'
+
+# Translation Texts
+# Uses translations in data/i18n/
+# TRANSLATIONS_FILES contains list of json files to load
+# Each contains json object (dictionnary) with entries as translation_key=translation
+# For example:
+# {
+#   "my_graph_title":"My beautiful graph"
+# }
+# You can override it to load your own files (use english base one to know the available translation keys)
+# TRANSLATION_FILES = "data/i18n/common.en.json"

@@ -1,0 +1,24 @@
+{
+  "#":"General",
+  
+  "male": "Male",
+  "female": "Female",
+  
+  "#": "Condition",
+  
+  "condition.none":"None",    
+  "condition.asthma":"Asthma",  
+  "condition.diabetes":"Diabetes",
+  "condition.lung":"Lung disease",    
+  "condition.heart":"Heart disease",   
+  "condition.kidney":"Kidney disease",  
+  "condition.immune":"Immunity",
+  
+  "#":"Graph titles",
+  
+  "axis.count.participants":"Count of participants",
+  "axis.percent": "Percentage",
+  "gender_graph":"Gender",
+  "age_group_graph":"Age group"
+  
+}
