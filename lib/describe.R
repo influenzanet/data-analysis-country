@@ -51,6 +51,12 @@ DataCollector = R6::R6Class("DataCollector", public=list(
   datasets=list(),
   collect=function(name, data) {
      self$datasets[[name]] = data
+  },
+  save=function(file, meta=list()) {
+    d = self$datasets
+    meta$time = Sys.time()
+    attr(d, "meta") <- meta
+    saveRDS(self$datasets)
   }
 ))
 

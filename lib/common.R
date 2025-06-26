@@ -10,7 +10,7 @@ options(ifn=list(autoconnect=FALSE, platform.path="config/", share.data="data/")
 
 # Name of the file to load containing platform definition (surveys, table mapping, ...)
 PLATFORM_FILENAME = "default_platform"
-TRANSLATION_FILES = "data/i18n/common.en.json"
+TRANSLATION_FILES = c("data/i18n/common.en.json", "data/i18n/intake.en.json", "data/i18n/weekly.en.json")
 
 library(duckdb)
 library(DBI)
@@ -64,7 +64,7 @@ load_config = function() {
     out.path = paste0(out.path, "/")
   }
   
-  share.option(platform=PLATFORM_FILENAME, base.out.path=out.path)
+  share.option(platform=PLATFORM_FILENAME, base.out.path=out.path, country=EUROSTAT_COUNTRY)
   
   invisible()
 }
