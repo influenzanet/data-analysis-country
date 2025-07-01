@@ -1,0 +1,16 @@
+{
+  "#": "General",
+  "copyright_graph": "Influenzanet",
+  "Yes": "Si",
+  "No": "No",
+  "DNK": "Non so",
+  "#.1": "Graphics",
+  "default_fill_color": "steelblue",
+  "axis.count.participants": "Count of participants",
+  "axis.percent": "Percentage",
+  "percentage": "percentuale",
+  "percentage_of_participants": "% di Partecipanti",
+  "on_last_n_weeks": "during the last {weeks} weeks",
+  "participant_week_by_weekday": "% di persone per settimana e per giorno della settimana, rispetto alla data del primo questionario della settimana",
+  "week": "Settimana"
+}
