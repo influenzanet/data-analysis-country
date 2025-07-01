@@ -1,9 +1,15 @@
-source("lib/common.R")
-source("lib/describe.R")
+##
+# Describe the cohort participants profile for a season
+##
 
+workspace::launch() # Load the common library and find the root path
+share.lib('describe') # Load describe script in lib/ (share.lib knows the path)
+
+# To change season number do not modify this line, run this script in another script using source()
+# And defining the season you want.
 season = get0("season", ifnotfound = calc_season(Sys.Date()))
 
-init.path(file.path('cohort_description', season))
+init_path(file.path('cohort_description', season))
 
 gg_labs = function(...) {
   labs(..., 
@@ -43,7 +49,7 @@ d = freq_var(intake, gender, na.rm=TRUE)
 results$collect("gender", d)
 
 plot_freq(d) + gg_labs(title=i18n("gender_graph"))
-ggsave(my.path("gender.pdf"), width = 8, height=6)
+ggsave(my_path("gender.pdf"), width = 8, height=6)
 
 # Age categories, by 10. 200 over maximum expected and will be replaced by max observed.
 age.categories = c(seq.int(0, 80, by=10), 200)
@@ -54,7 +60,7 @@ d = freq_var(intake, age.cat)
 results$collect("age.cat", d)
 
 plot_freq(d) + gg_labs(title=i18n("age_group_graph"))
-ggsave(my.path("age_group.pdf"), width = 8, height=6)
+ggsave(my_path("age_group.pdf"), width = 8, height=6)
 
 # Main activity & Occupation
 d = freq_var(intake, main.activity)
@@ -98,12 +104,12 @@ results$collect("condition", d)
 plot_freq(d) + 
   theme(axis.text.x = element_text(angle=75, vjust = 0.5)) +
   gg_labs(title=i18n("graph_condition"))
-ggsave(my.path("condition_all.pdf"), width = 8, height=6)
+ggsave(my_path("condition_all.pdf"), width = 8, height=6)
 
 plot_freq(d %>% filter(var !="condition.none"), percent = TRUE) + 
   theme(axis.text.x = element_text(angle=75, vjust = 0.5)) +
   gg_labs(title=i18n("graph_condition"))
-ggsave(my.path("condition_but_none.pdf"), width = 8, height=6)
+ggsave(my_path("condition_but_none.pdf"), width = 8, height=6)
 
 ## Distribution by age & gender and Age pyramid
 
@@ -133,9 +139,9 @@ plot_age_pyramid(ages, female=q_female, scales=list(labels=c('pop'=i18n("populat
       y=i18n("age_gender_proportion")
     )
 
-ggsave(my.path("age_pyramid.pdf"), width = 8, height=6)
+ggsave(my_path("age_pyramid.pdf"), width = 8, height=6)
 
 d = tidyr::pivot_wider(ages %>% select(age.cat, gender, count, pop), id_cols = c('age.cat', 'gender'), names_from = 'pop', values_from = "count")
 results$collect("age_gender", d)
 
-results$save(my.path("datasets.rds", meta=list(country=share.option('country'), season=season)))
+results$save(my_path("datasets.rds"), meta=list(country=share.option('country'), season=season))

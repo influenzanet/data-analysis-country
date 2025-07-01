@@ -3,34 +3,42 @@
 # Configure & setup environment, load common packages
 ###
 
-options(ifn=list(autoconnect=FALSE, platform.path="config/", share.data="data/", share.lib.path="lib/"))
+project.root = workspace::find_workspace()
+
+options(ifn=list(
+    autoconnect=FALSE, 
+    platform.path=paste0(project.root, "/config/"), 
+    share.data=paste0(project.root, "/data/"), # where to find data files using share.data.path() function
+    share.lib.path=paste0(project.root, "/lib/") # Where to find library scripts using share.lib() function
+  )
+)
 
 ## 
 #  Default values for variables in config.R
 
-# Name of the file to load containing platform definition (surveys, table mapping, ...)
-PLATFORM_FILENAME = "default_platform"
-TRANSLATION_FILES = c("data/i18n/common.en.json", "data/i18n/intake.en.json", "data/i18n/weekly.en.json")
-
 library(duckdb)
 library(DBI)
 library(ifnBase)
+library(workspace)
+
+# Name of the file to load containing platform definition (surveys, table mapping, ...)
+PLATFORM_FILENAME = "default_platform"
+TRANSLATION_FILES = share.data.path( c("i18n/common.en.json", "i18n/intake.en.json", "i18n/weekly.en.json"))
+
 
 #' Load configuration files and setup ifnBase package
 load_config = function() {
 
-  if(!file.exists("config")) {
-     stop("Config directory is not in working directory are you runnning script in root of the directory as working directory")
+  config.path = file.path(project.root, "config")
+
+  if(!file.exists(config.path)) {
+     stop(paste0("Config directory is not found ",sQuote(config.path),". Are you runnning script in root of the directory as working directory"))
   }
   
-  if(!file.exists("config")) {
-    stop("Config directory is not in working directory are you runnning script in root of the directory as working directory")
-  }
-   
-  config_file = file.path("config", "config.R")
+  config_file = file.path(config.path, "config.R")
   
   if(!file.exists(config_file)) {
-    stop("file config.R found in config/ directory, did you configure the project")
+    stop(paste0("file config.R found in config/ directory (", sQuote(config.path),"), did you configure the project"))
   }
 
   source(config_file, local=.GlobalEnv)
@@ -64,7 +72,8 @@ load_config = function() {
     out.path = paste0(out.path, "/")
   }
   
-  share.option(platform=PLATFORM_FILENAME, base.out.path=out.path, country=EUROSTAT_COUNTRY)
+  options(workspace.outpath=out.path)
+  share.option(platform=PLATFORM_FILENAME, country=EUROSTAT_COUNTRY)
   
   invisible()
 }

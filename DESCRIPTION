@@ -8,6 +8,7 @@ Imports:
   forcats (>= 1),
   dplyr (>= 1.1),
   ggplot2 (>= 3.4),
+  workspace,
   jsonlite,
   duckdb
 Depends:
@@ -15,7 +16,7 @@ Depends:
 Suggests:
 URL: https://www.influenzanet.info
 Additional_repositories: https://cran.sentiweb.fr/
-Remotes: github::sentiweb/swMisc, github::cturbelin/ifnBase
+Remotes: github::sentiweb/swMisc, github::cturbelin/ifnBase, github::sentiweb/workspace
 BugReports: https://github.com/cturbelin/ifnBase/issues
 Authors@R: c(
     person("Clément", "Turbelin", email="clement.turbelin@sorbonne-universite.fr", role=c("aut", "cre"))

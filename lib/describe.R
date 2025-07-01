@@ -49,14 +49,22 @@ freq_bool = function(data, columns) {
 
 DataCollector = R6::R6Class("DataCollector", public=list(
   datasets=list(),
+  
+  #' Collect a new dataset under the name provided
+  #' @param name name of the dataset in the results
+  #' @param data dataset data.frame 
   collect=function(name, data) {
      self$datasets[[name]] = data
   },
+  
+  #' Save results in an RDS file
+  #' @param file target file
+  #' @param meta optional list with metadata information about the results (time is added automatically)
   save=function(file, meta=list()) {
     d = self$datasets
     meta$time = Sys.time()
     attr(d, "meta") <- meta
-    saveRDS(self$datasets)
+    saveRDS(d, file=file)
   }
 ))
 
