@@ -4,7 +4,7 @@ Title: Influenzanet country analysis Projet
 Version: 0.0.9000
 Imports:
   rlang,
-  ifnBase (>= 0.6.8),
+  ifnBase (>= 1),
   forcats (>= 1),
   dplyr (>= 1.1),
   ggplot2 (>= 3.4),

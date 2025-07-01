@@ -1,2 +1,6 @@
 This data directory stores static data files intented to be shared across forks
 It's not advised to use it as your local data directory.
+
+If you want to add files in these directories, ensure you choose directory/file names avoiding the risk of name 
+collision with the original repository (using a specific prefix for example).
+
