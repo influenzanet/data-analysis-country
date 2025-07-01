@@ -3,7 +3,7 @@
 # Configure & setup environment, load common packages
 ###
 
-options(ifn=list(autoconnect=FALSE, platform.path="config/", share.data="data/"))
+options(ifn=list(autoconnect=FALSE, platform.path="config/", share.data="data/", share.lib.path="lib/"))
 
 ## 
 #  Default values for variables in config.R

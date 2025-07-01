@@ -1,9 +1,9 @@
 source("lib/common.R")
 source("lib/describe.R")
 
-init.path('cohort_description')
+season = get0("season", ifnotfound = calc_season(Sys.Date()))
 
-season = calc_season(Sys.Date())
+init.path(file.path('cohort_description', season))
 
 gg_labs = function(...) {
   labs(..., 
