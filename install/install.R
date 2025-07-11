@@ -1,6 +1,7 @@
 ## This script can be run to install the necessary packages
 
-if(is(packageVersion("remotes"), "try-error")) {
+v = try(packageVersion("remotes"), silent=TRUE)
+if(inherits(v, "try-error")) {
   install.packages("remotes")
 }
 

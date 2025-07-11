@@ -77,10 +77,10 @@ To have more details about these function see [`workspace` package documentation
 
 ### Parametrized scripts
 
-Scripts expect some variables to be run, like the current season number. By default it will run with the current season but you can run a script
+Scripts expect some variables to be defined to run, like the current season number. By default it will run with the current season but you can run a script
 using another season.
 
-To do this, avoid editing directly the script (you will have conflict in case of update) but run it from another script.
+To do this, avoid editing directly the script (you will have conflict in case of update) but the script it from another one.
 
 For example, to run `cohort_description.R`
 
@@ -91,7 +91,7 @@ season = 2023
 source("analysis/cohort_description.R")
 ```
 
-It's also possible to run a script for several season using local(). Using local isolate the run of each season avoiding the
+It's also possible to run a script for several seasons using `local()`. local isolates the run of each season avoiding the
 risk of mixing data between seasons.
 
 ```R
